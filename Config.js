@@ -10,7 +10,7 @@ exports.load = function(path, callback) {
     j = JSON.parse(data);
     o = {};
     _.each(j.stats, function(i){
-      if o.hasOwnProperty(i.token) {
+      if (o.hasOwnProperty(i.token)) {
         o[i.token].push({
           interval: i.interval,
           stat: new StatStream.StatStream(i.type)

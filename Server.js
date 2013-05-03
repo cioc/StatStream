@@ -1,6 +1,7 @@
 var StatStream = require('./StatStream.js');
 var config = require('./Config.js');
 var net  = require('net');
+var _ = require('underscore');
 
 var interval = 10000; //10 seconds
 var port = 8001;
