@@ -1,8 +1,10 @@
+//this module produces various streams of data for testing purposes
 var net = require('net');
+var _ = require('underscore');
 
 var hostname = null;
 var port = null;
-var intervals = [];
+var timeids = [];
 
 exports.configure = function(h, p) {
   hostname = h;
@@ -15,7 +17,7 @@ function send(item) {
   }
   else {
     var client = net.connect({host: hostname, port: port}, function(){
-      client.write(item);
+      client.write(item.toString());
       client.end();
     });
   }
@@ -25,7 +27,7 @@ exports.repeat = function(pattern, interval) {
   var x = function () {
     send(pattern);
   };
-  setInterval(x, interval);
+  timeids.push(setInterval(x, interval));
 };
 
 exports.increment = function(start, interval) { 
@@ -34,14 +36,14 @@ exports.increment = function(start, interval) {
     send(incr);
     incr += 1;
   };
-  setInterval(x, interval);
+  timeids.push(setInterval(x, interval));
 };
 
 exports.random = function(interval) {
   var x = function() {
     send(Math.random()); 
   };
-  setInterval(x, interval);
+  timeids.push(setInterval(x, interval));
 }
 
 exports.array = function(arr, interval) {
@@ -51,6 +53,19 @@ exports.array = function(arr, interval) {
       send(arr[incr]);
       incr += 1; 
     }
+    else {
+      stop();  
+    }
   };
-  setInterval(x, interval);
+  timeids.push(setInterval(x, interval));
+}
+
+function stop() {
+  _.each(timeids, function(id){
+    clearInterval(id);
+  });
+}
+
+exports.stop = function() {
+  stop();
 }
