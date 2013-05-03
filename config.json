@@ -1,0 +1,12 @@
+[{
+  "token": "hamburger",
+  "name": "hamburger-max",
+  "type": "max",
+  "interval": 10000
+},
+{
+  "token": "hotdog",
+  "name": "hotdog-avg",
+  "type": "avg",
+  "interval": 15000
+}]

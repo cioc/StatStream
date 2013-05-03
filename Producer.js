@@ -17,7 +17,7 @@ function send(item) {
   }
   else {
     var client = net.connect({host: hostname, port: port}, function(){
-      client.write(item.toString());
+      client.write(JSON.stringify(item));
       client.end();
     });
   }

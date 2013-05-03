@@ -73,10 +73,10 @@ StatStream.prototype = {
     if (self.type == 'min' || self.type == 'max') {
       return self.extremum;
     }
-    if (s.type == 'count') {
+    if (self.type == 'count') {
       return self.count;
     }
-    if (s.type == 'avg') {
+    if (self.type == 'avg') {
       return self.avg;
     }
   } //end val
