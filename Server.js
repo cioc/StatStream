@@ -5,7 +5,7 @@ var net  = require('net');
 var interval = 10000; //10 seconds
 var port = 8001;
 
-config.load('config.json', function(stats){
+config.load('config.json', function(server_config, stats){
   var server = net.createServer(function(c){ 
     c.on('end', function(){
       console.log('disconnect');
@@ -16,9 +16,11 @@ config.load('config.json', function(stats){
         console.log(d.toString());
         j = JSON.parse(d);
         if (stats.hasOwnProperty(j.token)) {
-          stats[j.token].stat.update(j.val);
-          console.log(j.token);
-          console.log(stats[j.token].stat.val());
+          _.each(stats[j.token], function(stat){
+            stat.stat.update(j.val); 
+            console.log(j.token);
+            console.log(stat.stat.val());
+          });
         }
       }
       catch(e) {
@@ -28,7 +30,7 @@ config.load('config.json', function(stats){
     }); //end c.on('data'
   });
 
-  server.listen(port, function(){
+  server.listen(server_config.port, function(){
     console.log('server started');
   });
 }); //end config.load

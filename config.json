@@ -1,12 +1,25 @@
-[{
-  "token": "hamburger",
-  "name": "hamburger-max",
-  "type": "max",
-  "interval": 10000
-},
 {
-  "token": "hotdog",
-  "name": "hotdog-avg",
-  "type": "avg",
-  "interval": 15000
-}]
+  "server" : {
+    "name": "simple server",
+    "type": "leaf",
+    "host": "localhost",
+    "port": 8001,
+    "upstream": {
+      "type": "redis",
+      "host": "redis.lsda.cs.uchicago.edu",
+      "port": 6379
+    }
+  },
+  "stats": [{
+    "token": "hamburger",
+    "name": "hamburger-max",
+    "type": "max",
+    "interval": 10000
+  },
+  {
+    "token": "hotdog",
+    "name": "hotdog-avg",
+    "type": "avg",
+    "interval": 15000
+  }]
+}

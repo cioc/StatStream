@@ -9,12 +9,20 @@ exports.load = function(path, callback) {
     if (err) throw err;
     j = JSON.parse(data);
     o = {};
-    _.each(j, function(i){
-      o[i.token] = {
-        interval: i.interval,
-        stat: new StatStream.StatStream(i.type)
-      };
+    _.each(j.stats, function(i){
+      if o.hasOwnProperty(i.token) {
+        o[i.token].push({
+          interval: i.interval,
+          stat: new StatStream.StatStream(i.type)
+        }); 
+      }
+      else {
+        o[i.token] = [{
+          interval: i.interval,
+          stat: new StatStream.StatStream(i.type)
+        }];
+      }
     });
-    callback(o);
+    callback(j.server, o);
   });
 };
