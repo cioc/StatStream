@@ -5,19 +5,22 @@ var _ = require('underscore');
 var hostname = null;
 var port = null;
 var timeids = [];
+var token = null;
 
-exports.configure = function(h, p) {
+exports.configure = function(t, h, p) {
+  token = t;
   hostname = h;
   port = p;
 };
 
 function send(item) {
+  var str = JSON.stringify({token: token, val: item});
   if (hostname == null) {
-    console.log(item);
+    console.log(str);
   }
   else {
     var client = net.connect({host: hostname, port: port}, function(){
-      client.write(JSON.stringify(item));
+      client.write(str);
       client.end();
     });
   }
