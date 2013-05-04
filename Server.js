@@ -55,5 +55,5 @@ config.load('config.json', function(server_config, stats){
         }
       }); 
     });
-  }, 1000);
+  }, server_config.interval);
 }); //end config.load
