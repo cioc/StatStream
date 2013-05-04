@@ -13,7 +13,7 @@ function reset(s) {
 
 function update_min(s, val) {
   if (s.extremum == null) {
-    s.extremum = val
+    s.extremum = val;
   }
   else {
     if (val < s.extremum) {

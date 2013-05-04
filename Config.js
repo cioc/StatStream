@@ -13,12 +13,16 @@ exports.load = function(path, callback) {
       if (o.hasOwnProperty(i.token)) {
         o[i.token].push({
           interval: i.interval,
+          elapsed: i.interval,
+          name: i.name,
           stat: new StatStream.StatStream(i.type)
         }); 
       }
       else {
         o[i.token] = [{
           interval: i.interval,
+          elapsed: i.interval,
+          name: i.name,
           stat: new StatStream.StatStream(i.type)
         }];
       }

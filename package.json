@@ -5,7 +5,9 @@
   "private": true,
   "dependencies": {
     "nodeunit": "",
-    "underscore": ""
+    "underscore": "",
+    "redis": "",
+    "hiredis": ""
   }
 }
 

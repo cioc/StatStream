@@ -1,4 +1,5 @@
 var StatStream = require('./StatStream.js');
+var Upstream = require('./Upstream.js');
 var config = require('./Config.js');
 var net  = require('net');
 var _ = require('underscore');
@@ -38,6 +39,21 @@ config.load('config.json', function(server_config, stats){
   server.listen(server_config.port, function(){
     console.log('server started');
   });
-}); //end config.load
+  
+  Upstream.configure(server_config.upstream.type,
+                     server_config.upstream.host,
+                     server_config.upstream.port); 
 
-//TODO - need periodic push to upstream job
+  setInterval(function(){
+    _.each(stats, function(stat_arr){
+      _.each(stat_arr, function(stat){
+        stat.elapsed -= 1000;
+        if (stat.elapsed <= 0) {
+          Upstream.push(stat);
+          stat.elapsed = stat.interval;
+          stat.stat.reset();
+        }
+      }); 
+    });
+  }, 1000);
+}); //end config.load
