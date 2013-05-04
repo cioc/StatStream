@@ -4,9 +4,6 @@ var config = require('./Config.js');
 var net  = require('net');
 var _ = require('underscore');
 
-var interval = 10000; //10 seconds
-var port = 8001;
-
 //TODO this needs to change based on role
 //role = 'combiner' --> combining other stats
 //role = 'leaf' --> as things are here
@@ -43,6 +40,7 @@ config.load('config.json', function(server_config, stats){
   Upstream.configure(server_config.upstream.type,
                      server_config.upstream.host,
                      server_config.upstream.port); 
+  console.log(server_config.upstream.interval);
 
   setInterval(function(){
     _.each(stats, function(stat_arr){
@@ -55,5 +53,5 @@ config.load('config.json', function(server_config, stats){
         }
       }); 
     });
-  }, server_config.interval);
+  }, server_config.upstream.interval);
 }); //end config.load

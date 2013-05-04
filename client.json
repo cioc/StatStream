@@ -1,4 +1,5 @@
 {
-  "host": "localhost",
-  "port": 8001
+  "host": "web1.lsda.cs.uchicago.edu",
+  "port": 7000,
+  "prefix": "web1"
 }

@@ -3,23 +3,35 @@
     "name": "simple server",
     "role": "leaf",
     "host": "localhost",
-    "port": 8001,
+    "port": 7000,
     "upstream": {
       "type": "redis",
       "host": "redis.lsda.cs.uchicago.edu",
       "port": 6379,
-      "interval": 10000
+      "interval": 1000
     }
   },
   "stats": [{
-    "token": "cpu",
-    "name": "cpu",
+    "token": "web0:cpu",
+    "name": "web0:cpu",
     "type": "avg",
     "interval": 10000
   },
   {
-    "token": "mem",
-    "name": "mem",
+    "token": "web0:mem",
+    "name": "web0:mem",
+    "type": "avg",
+    "interval": 10000
+  },
+  {
+    "token": "web1:cpu",
+    "name": "web1:cpu",
+    "type": "avg",
+    "interval": 10000
+  },
+  {
+    "token": "web1:mem",
+    "name": "web1:mem",
     "type": "avg",
     "interval": 10000
   }]
